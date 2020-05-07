@@ -1,0 +1,22 @@
+1.datetime
+a）获取当前日期和时间——datetime.now
+b）获取指定日期和时间——dt = datetime(2020, 05, 05, 10, 00)
+c）datetime转换为timestamp（时间戳）——datetime.timestamp
+d）timestamp转换为datetime——datetime.fromtimestamp(t)#t代表时间戳
+e）str转换为datetime——datetime.strptime(dt_str,format)#format代表给定的格式化时间格式
+f）datetime转换为str——time.strftime（format）
+g）datetime加减——datetime.timedelta
+
+2.collections
+a) nametuple——namedtuple是一个函数，它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用属性而不是索引来引用tuple的某个元素。
+    >>> from collections import namedtuple
+    >>> Point = namedtuple('Point', ['x', 'y'])
+    >>> p = Point(1, 2)
+    >>> p.x
+    1
+    >>> p.y
+    2
+b) deque——deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈，deque除了实现list的append()和pop()外，还支持appendleft()和popleft()
+c) defaultdict——使用dict时，如果引用的Key不存在，就会抛出KeyError。如果希望key不存在时，返回一个默认值，就可以用defaultdict
+d）OrderedDict——使用dict时，Key是无序的。如果要保持Key的顺序，可以用OrderedDict。此顺序为插入key的顺序，非key值本身的顺序
+e）
