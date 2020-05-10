@@ -19,4 +19,24 @@ a) nametuple——namedtuple是一个函数，它用来创建一个自定义的t
 b) deque——deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈，deque除了实现list的append()和pop()外，还支持appendleft()和popleft()
 c) defaultdict——使用dict时，如果引用的Key不存在，就会抛出KeyError。如果希望key不存在时，返回一个默认值，就可以用defaultdict
 d）OrderedDict——使用dict时，Key是无序的。如果要保持Key的顺序，可以用OrderedDict。此顺序为插入key的顺序，非key值本身的顺序
-e）
+
+3.base64——一种进制的转换
+    >>> import base64
+    >>> base64.b64encode(b'binary\x00string')
+    b'YmluYXJ5AHN0cmluZw=='
+    >>> base64.b64decode(b'YmluYXJ5AHN0cmluZw==')
+    b'binary\x00string'
+  其中一种特殊方法base64.urlsafe_b64encode可将转换后字符+和/分别变成-和_。
+  
+ 4.hashlib——是一种摘要算法，针对字符串等进行算法加密，常用的是md5和sha1，而安全性较高的是sha256和sha512，他们加密出来的字符长度也更长。
+    hashlib.md5('messages'.encode('utf-8')).hexdigest()
+    hashlib.sha1('messages'.encode('utf-8')).hexdigest()
+    但是黑客可能会获取到一些常用口令的md5值，直接和数据库口令进行比对，所以我们需要在密码里加‘salt’进行加密，salt的取值各有不同。
+ 5.hmac——同hashlib里的加盐，这是程序为我们做好的可以直接使用的。
+    hmac.new(key, message, digestmod='MD5')——通过md5算法进行加密
+ 
+ 6.itertools——提供几个无限迭代器和其他函数
+    count()/cycle(str)/repeat(str[,循环次数])
+    takewhile(取值规则,取值迭代器)——通过takewhile()等函数根据条件判断来截取出一个有限的序列
+    chain()——chain()可以把一组迭代对象串联起来，形成一个更大的迭代器：
+    groupby()——groupby()把迭代器中相邻的重复元素挑出来放在一起：
