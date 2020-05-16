@@ -1,0 +1,22 @@
+1.tcp：一种安全有序的传递协议，在两个电脑间建立可靠连接，保证包按序到达；通过握手建立连接，并对数据包进行编号，如果有包丢掉了，就会重新发送。
+2.tcp编程——客户端
+  1）导包socket
+  2）新建socket对象 s=socket.socket(socket.AF_INET,socket.SOCK.STREAM)
+  3）建立连接 s.connect('ip',端口)
+  4）发送数据 s.send(b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n')
+  5）接收数据
+            buffer = []
+            while True:
+              d = s.recv(1024)//每次最多接收1024字节的数据
+              if d:
+                buffer.append(d)
+              else:
+                break
+            data = b''.join(buffer)
+  6）退出连接 s.close()//一次完整的网络通信已经结束了
+  7）分离http头和网页本身
+            header,html = data.split(b'\r\n\r\n',1)
+            header.decode('utf-8')
+     把html数据写入文件夹：
+            with  open('sina.html','wb') as f:
+              f.write(html)
