@@ -2,9 +2,9 @@
 2.tcp编程——客户端
   1）导包socket
   2）新建socket对象 s=socket.socket(socket.AF_INET,socket.SOCK.STREAM)
-  3）建立连接 s.connect('ip',端口)
-  4）发送数据 s.send(b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n')
-  5）接收数据
+  3）根据IP和端口去建立连接 s.connect(('ip',端口))//里面是个tuple
+  4）发送二进制数据 s.send(b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n')
+  5）接收数据，直至完全接收
             buffer = []
             while True:
               d = s.recv(1024)//每次最多接收1024字节的数据
