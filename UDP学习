@@ -1,0 +1,17 @@
+1.udp编程——服务端
+  1）新建一个socket s = socket.socket(socket.INAF,socket.DGRAM)
+  2）绑定IP和端口 s.bind(('127.0.0.1',9999))
+  3）接收来自客户端的数据和套接字，addr包括IP和端口
+    while True:
+      data,addr = s.recvfrom(1024)
+      print('received from %s:%s'%addr)
+      s.sendto('hello,%s'%data,addr)
+      
+2.客户端
+  1）新建一个socket s = socket.socket(socket.INAF,socket.DGRAM)
+  2）发送数据到服务端 s.sendto(数据,('127.0.0.1',9999))
+  3）接收数据并关闭连接
+    data = s.recv(1024)
+    print(data.decode('utf-8'))
+    s.close()
+      
