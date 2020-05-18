@@ -20,3 +20,22 @@
      把html数据写入文件夹：
             with  open('sina.html','wb') as f:
               f.write(html)
+         
+3.tcp编程——服务器端
+  1)先创建一个socket，IPv4协议 s=socket.socket(socket.AF_INET,socket.SOCK.STREAM)
+  2）绑定IP和端口 s.bind(('127.0.0.1', 9999))
+  3）设置端口最大监听数量 s.listen(5)
+  4）利用accept函数去获取客户端的套接字和地址，创建多线程去调用处理数据的函数
+    sock,addr = s.accept()
+    t = threading.Thread(target=tcplink,args=(sock,addr))
+    t.start()
+  5）tcplink函数接收来自客户端的数据，并作出处理
+    def tcplink(sock,addr):
+      print('conn from %s'%addr)
+      while True:
+        d = sock.recv(1024)
+        if not d or d.decode('utf-8') == 'exit':
+          break
+        sock.send('hello!%s'%d.decode('utf-8').encode('utf-8'))#对来自客户端的数据前新增hello字符
+      s.close()
+        
